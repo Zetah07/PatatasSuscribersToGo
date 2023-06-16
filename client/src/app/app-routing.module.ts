@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SubscriberListComponent } from './subscriber/list/subscriber-list.component';
-import { SubscriberFormComponent } from './subscriber/form/subscriber-form.component';
-import { SubscriberDetailsComponent } from './subscriber/details/subscriber-details.component';
+import { LoginComponent } from './users/login/login.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'subscribers', pathMatch: 'full' },
-  { path: 'subscribers', component: SubscriberListComponent },
-  { path: 'add', component: SubscriberFormComponent },
-  { path: 'update/:id', component: SubscriberFormComponent },
-  { path: 'details/:id', component: SubscriberDetailsComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

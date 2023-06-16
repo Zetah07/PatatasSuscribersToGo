@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { SubscriberListComponent } from './subscriber/list/subscriber-list.component';
 import { SubscriberFormComponent } from './subscriber/form/subscriber-form.component';
 import { SubscriberDetailsComponent } from './subscriber/details/subscriber-details.component';
-import { RegisterComponent } from './users/register/register.component';
 import { LoginComponent } from './users/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -15,12 +17,13 @@ import { LoginComponent } from './users/login/login.component';
     SubscriberListComponent,
     SubscriberFormComponent,
     SubscriberDetailsComponent,
-    RegisterComponent,
     LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    ReactiveFormsModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
