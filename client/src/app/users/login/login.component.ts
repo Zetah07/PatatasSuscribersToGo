@@ -11,6 +11,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   token: string = '';
+  message: string  = '';
+  
 
   constructor(private apiService: ApiService, private router: Router) {
     this.loginForm = new FormGroup({
@@ -19,26 +21,21 @@ export class LoginComponent {
     });
   }
 
-  async onLogin() {
+  onLogin() {
     const username = this.loginForm.get('username')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    try {
-      const data: { token: string } = await this.apiService.login(username, password).toPromise();
-      this.token = data.token;
-      console.log(data);
-
       this.apiService.login(username, password).subscribe(
-        (data: { token: string }) => {
-          this.token = data.token;
-          console.log(data);
+        (data: any) => {
+          this.apiService.setToken(data.Token);
+            console.log('data', data);
   
           this.router.navigate(['/home']);
         },
+        (error: any) => {
+        console.log('el error tal', error);
+        // this.message = error
+        }
       );
     }
-    catch (error) {
-      console.error('There was an error!', error);
-    }
-  }
 }

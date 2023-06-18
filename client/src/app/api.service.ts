@@ -1,22 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   [x: string]: any;
-  private baseUrl = 'https://lab.app.invertebrado.co/api/';
+  private baseUrl = 'https://lab.app.invertebrado.co/api';
+  private token: string = '';
+  private headers = new HttpHeaders();
+  private Username: string = '';
 
   constructor(private http: HttpClient) {}
+
+
+  setToken(token: string) {
+    this.token = token;
+    this.headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+  }
+
+  getToken(): string {
+    return this.token;
+  }
 
   login(username: string, password: string): Observable<any> {
     const loginData = {
       UserName: username,
       Password: password,
     };
-    return this.http.post<any>(`${this.baseUrl}/account/login`, loginData);
+
+    return this.http.post<any>(`${this.baseUrl}/account/login`, loginData).pipe(
+      tap((resp) =>{
+        this.Username = resp.FirstName+' '+resp.LastName;
+        console.log('tukituki', resp);
+      }
+    ));
+  }
+
+  getUserName(): string {
+    return this.Username;
   }
 
   getSubscribers(
@@ -25,19 +50,19 @@ export class ApiService {
     count: number,
     sortOrder: string,
     sortType: number
-  ): Observable<any> {
+  ) {
+
     const params = new HttpParams()
       .set('criteria', criteria)
-      .set('page', page.toString())
-      .set('count', count.toString())
+      .set('page', page)
+      .set('count', count)
       .set('sortOrder', sortOrder)
-      .set('sortType', sortType.toString());
-
-    return this.http.get(`${this.baseUrl}subscribers`, { params });
+      .set('sortType', sortType);
+    return this.http.get<any>(`${this.baseUrl}/subscribers`, {headers: this.headers, params});
   }
 
   getSubscriberById(id: number) {
-    return this.http.get<any>(`${this.baseUrl}/subscribers/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/subscribers/${id}`, {headers: this.headers});
   }
 
   createSubscribers(subscribers: any[]) {
