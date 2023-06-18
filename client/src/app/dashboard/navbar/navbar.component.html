@@ -1,0 +1,35 @@
+<div class="container">
+    <aside class="sidebar bg-colorNav w-1/6 min-h-screen text-gray-300">
+        <h2 class="sidebar-title">Patata ToGo</h2>
+        <div class="sidebar-content">
+            <div class="sidebar-links">
+                <li class="sidebar-link">
+                    <a href="#" class="hover:text-yellow-500">Crear un suscriptor</a>
+                </li>
+                <li class="sidebar-link">
+                    <a href="#" class="hover:text-yellow-500">Borrar un suscriptor</a>
+                </li>
+                <li class="sidebar-link">
+                    <a href="#" class="hover:text-yellow-500">Lista de Paises</a>
+                </li>
+            </div>
+            <!-- Perfil de usuario -->
+            <div class="sidebar-profile">
+                <span class="nav-image">
+                    <img src="../../assets/images/Logo.webp" alt="logo_img" />
+                </span>
+                <!-- Mensaje de bienvenida -->
+                <p class="font-thin text-gray-400">Bienvenido, {{ username }}</p>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <p class="text-sm text-gray-100 font-thin">
+                © Copyright - 2023 | Tekus SAS | Todos los derechos reservados
+            </p>
+            <!-- Botón de logout -->
+            <button class="logout-button" (click)="logout()">
+        <i class="fa-solid fa-power-off text-lg ml-2"></i> Desconectar
+      </button>
+    </div>
+</aside>
+</div>

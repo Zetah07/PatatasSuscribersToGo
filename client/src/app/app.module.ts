@@ -7,6 +7,11 @@ import { LoginComponent } from './users/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateComponent } from './dashboard/create/create.component';
+import { NavbarComponent } from './dashboard/navbar/navbar.component';
+import { DeleteComponent } from './dashboard/delete/delete.component';
+import { UpateComponent } from './dashboard/upate/upate.component';
+import { RegisterComponent } from './users/register/register.component';
 
 
 @NgModule({
@@ -14,6 +19,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    CreateComponent,
+    NavbarComponent,
+    DeleteComponent,
+    UpateComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

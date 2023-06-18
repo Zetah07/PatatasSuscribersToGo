@@ -21,21 +21,14 @@ export class LoginComponent {
     });
   }
 
-  onLogin() {
-    const username = this.loginForm.get('username')?.value;
-    const password = this.loginForm.get('password')?.value;
+  async onLogin() {
+    const username = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
 
-      this.apiService.login(username, password).subscribe(
-        (data: any) => {
-          this.apiService.setToken(data.Token);
-            console.log('data', data);
-  
-          this.router.navigate(['/home']);
-        },
-        (error: any) => {
-        console.log('el error tal', error);
-        // this.message = error
-        }
-      );
+    this.apiService.login(username, password)
+      .then((response: any) => {
+        this.token = response.token;
+        this.router.navigate(['/home']);
+      })
     }
 }

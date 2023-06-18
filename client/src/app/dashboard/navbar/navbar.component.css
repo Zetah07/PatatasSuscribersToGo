@@ -1,0 +1,165 @@
+.container{
+  display: flex;
+}
+
+.sidebar {
+    background-color: #705f34;
+    max-height: 100vh;
+    width: 33%;
+    min-width:50%;
+  }
+  
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: calc(100vh - 120px);
+    max-height: 100vh;
+  }
+
+  .sidebar-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+  }
+  
+  .sidebar-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: color 0.3s;
+  }
+  
+  .sidebar-link:hover {
+    color: #f5dd4b;
+  }
+  
+  .sidebar-link::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 4px;
+    height: 80%;
+    background-color: #f5dd4b;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .sidebar-link:hover::after {
+    opacity: 1;
+  }
+  
+  .sidebar-profile {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .nav-image img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 2px;
+    text-align: center;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .welcome-message {
+    font-weight: 300;
+    color: #ccc;
+  }
+  
+  .logout-btn {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #786430;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .subscriber-list {
+    height: 50vh;
+    overflow-y: auto;
+  }
+  
+  .subscriber-details {
+    height: 50vh;
+    padding-top: 20px;
+  }
+
+  @media screen and (max-width: 1080px) {
+    .sidebar {
+      width: 30%;
+    }
+  
+    .sidebar-header,
+    .sidebar-links
+    .sidebar-footer {
+      display: none;
+    }
+    
+}
+  
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      width: 30%;
+    }
+    .sidebar-header,
+  .sidebar-links,
+  .logout-button,
+  .sidebar-footer {
+    padding: 2px;
+  }
+
+  .sidebar-title {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+  }
+
+  .sidebar-link {
+    padding: 5px;
+  }
+
+  .logout-button {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1080px) {
+  .container {
+    width: calc(100vw / 3);
+  }
+}

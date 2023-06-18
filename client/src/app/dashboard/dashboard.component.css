@@ -1,0 +1,8 @@
+
+
+
+@media (min-width: 1080px) {
+    .navbar-container {
+      width: calc(100vw / 3);
+    }
+  }

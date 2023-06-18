@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root',
@@ -9,88 +9,104 @@ export class ApiService {
   [x: string]: any;
   private baseUrl = 'https://lab.app.invertebrado.co/api';
   private token: string = '';
-  private headers = new HttpHeaders();
+  private refreshToken: string = '';
   private Username: string = '';
 
-  constructor(private http: HttpClient) {}
-
-
-  setToken(token: string) {
-    this.token = token;
-    this.headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    });
-  }
-
-  getToken(): string {
-    return this.token;
-  }
-
-  login(username: string, password: string): Observable<any> {
-    const loginData = {
+  async login(username: string, password: string) {
+    const body = {
       UserName: username,
       Password: password,
     };
 
-    return this.http.post<any>(`${this.baseUrl}/account/login`, loginData).pipe(
-      tap((resp) =>{
-        this.Username = resp.FirstName+' '+resp.LastName;
-        console.log('tukituki', resp);
-      }
-    ));
+    const response = await axios.post(`${this.baseUrl}/account/login `, body);
+    if (response.status === 200) {
+      this.Username = response.data.FirstName + '' + response.data.LastName;
+      this.token = response.data.Token;
+      this.refreshToken = response.data.RefreshToken;
+
+      return response.data;
+    } else {
+      return new Error('error login in');
+    }
   }
 
-  getUserName(): string {
-    return this.Username;
-  }
-
-  getSubscribers(
+  async getSubscribers(
     criteria: string,
     page: number,
     count: number,
     sortOrder: string,
     sortType: number
   ) {
+    const params = {
+      criteria: criteria,
+      page: page,
+      count: count,
+      sortOrder: sortOrder,
+      sortType: sortType,
+    };
 
-    const params = new HttpParams()
-      .set('criteria', criteria)
-      .set('page', page)
-      .set('count', count)
-      .set('sortOrder', sortOrder)
-      .set('sortType', sortType);
-    return this.http.get<any>(`${this.baseUrl}/subscribers`, {headers: this.headers, params});
-  }
-
-  getSubscriberById(id: number) {
-    return this.http.get<any>(`${this.baseUrl}/subscribers/${id}`, {headers: this.headers});
-  }
-
-  createSubscribers(subscribers: any[]) {
-    return this.http.post<any>(`${this.baseUrl}/subscribers/`, { Subscribers: subscribers });
-  }
-
-  deleteSubscriberById(id: number) {
-    return this.http.delete<any>(`${this.baseUrl}/subscribers/${id}`);
-  }
-  
-  updateSubscriberById(id: number, subscriber: any) {
-    return this.http.put<any>(`${this.baseUrl}/subscribers/${id}`, subscriber);
-  }
-
-  getCountries(
-    criteria: string, 
-    page: number,
-    count: number,
-    sortOrder: string,
-    sortType: number
-    ){
-      const params = {
-        criteria: criteria,
-        page: page.toString(),
-        count: count.toString(),
-        sortOrder: sortOrder,
-        sortType: sortType.toString()
-      };
-      return this.http.get<any>(`${this.baseUrl}/countries`, {params: params});
+    try {
+      const response = await axios.get(`${this.baseUrl}/subscribers`, {
+        params: params,
+        headers: { Authorization: `Bearer ${this.token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error(error);
     }
+  }
+
+  async getSubscriberById(id: number) {
+    try {
+      const response = await axios.get(`${this.baseUrl}/subscribers/${id}`, {
+        headers: { Authorization: `Bearer ${this.token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async createSubscribers(subscribers: any[]) {
+    try {
+      const response = await axios.post(`${this.baseUrl}/subscribers`, {
+        Subscribers: subscribers,
+        headers: { Authorization: `Bearer ${this.token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async deleteSubscriberById(id: number) {
+    try{
+    const response = await axios.delete(`${this.baseUrl}/subscribers/${id}`,{
+        headers: { Authorization: `Bearer ${this.token}` },
+      });
+      return response.data;
+  }catch(error){
+    console.error(error);
+  }
+}
+
+  async updateSubscriberById(id: number, subscriber: any) {
+    try {
+      const response = await axios.put(`${this.baseUrl}/subscribers/${id}`, {
+        Subscriber: subscriber,
+        headers: { Authorization: `Bearer ${this.token}` },
+    });
+    return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+}
+
+  async getUserName() {
+    return this.Username;
+  }
+
+  async setToken(token: string, refreshToken: string) {
+    this.token = token;
+  }
 }

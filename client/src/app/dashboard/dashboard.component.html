@@ -1,116 +1,64 @@
-<div>
-  <!-- Navbar -->
-  <nav class="bg-ColorNav text-gray-200 h-16 flex items-center justify-between px-5 border-b">
-    <div>
-      <p class="text-lg font-bold">Bienvenido, {{ username }}</p>
-    </div>
-    <div>
-      <img src="../../assets/images/Logo.webp" alt="Imagen de perfil" class="h-10 w-10 " />
-      <button class="text-gray-400 ml-4" (click)="logout()">
-        <i class="fa-sign-out-alt">Log Out</i>
-      </button>
-    </div>
-  </nav>
+<div class="flex">
+  <app-navbar class="w-1/6"></app-navbar>
+  <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
+    <h2 class="text-2xl font-bold mb-4">
+      {{ "Lista de suscriptores" }}
+    </h2>
+    <table class="border-collapse w-full">
+      <thead>
+        <tr>
+          <th class="border px-4 py-2">ID</th>
+          <th class="border px-4 py-2">Nombre</th>
+          <th class="border px-4 py-2">Email</th>
+          <th class="border px-4 py-2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subscriber of subscriberDetails" class="border">
+          <td class="border px-4 py-2">{{ subscriber.Id }}</td>
+          <td class="border px-4 py-2">{{ subscriber.Name }}</td>
+          <td class="border px-4 py-2">{{ subscriber.Email }}</td>
+          <td class="border px-4 py-2">
+            <button (click)="openModal(subscriber)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver detalles</button>
+            <span class="mx-2">|</span>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <!-- Content -->
-  <div class="flex">
-    <!-- Sidebar -->
-    <aside class="bg-ColorNav justify-between text-gray-200 w-1/6 p-4 min-h-screen lg:block">
-      <div class="overflow-y-auto pt-48">
-        <ul class="flex flex-col items-center">
-          <li class="py-2 pl-4 pr-8 border-l-4 border-transparent hover:border-yellow-500">
-            <a href="#" class="hover:text-yellow-500">Crear un suscriptor</a>
-          </li>
-          <li class="py-2 pl-4 pr-8 border-l-4 border-transparent hover:border-yellow-500">
-            <a href="#" class="hover:text-yellow-500">Borrar un suscriptor</a>
-          </li>
-          <li class="py-2 pl-4 pr-8 border-l-4 border-transparent hover:border-yellow-500">
-            <a href="#" class="hover:text-yellow-500">Lista de Paises</a>
-          </li>
-        </ul>
+    <div *ngIf="selectedSubscriber" class="mt-4">
+      <h2 class="text-2xl font-bold">
+        Detalles del Suscriptor: {{ selectedSubscriber.Id }}
+      </h2>
+      <div class="mt-2">
+        <p>Nombre del suscriptor: {{ selectedSubscriber.Name }}</p>
+        <p>Area: {{ selectedSubscriber.Area }}</p>
+        <p>País: {{ selectedSubscriber.CountryName }}</p>
+        <p>Correo electrónico: {{ selectedSubscriber.Email }}</p>
+        <p>Número telefónico: {{ selectedSubscriber.PhoneCodeAndNumber }}</p>
+        <p>Estado de Suscripción: {{ selectedSubscriber.SubscriptionStateSubscriptionStateDescription }}</p>
       </div>
-      <div class="mt-auto mb-4 pt-56 text-center">
-        <p class="text-2xl font-bold">Patata ToGo</p>
-        <p class="text-sm text-gray-100 font-thin">© Copyright - 2023 | Tekus SAS | Todos los derechos reservados</p>
-      </div>
-    </aside>
+      <button (click)="closeModal()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
+    </div>
 
-    <main class="w-2/3 p-4 ml-12 flex flex-col">
-      <div class="overflow-y-auto">
-        <h2 class="text-center text-gray-400 text-2xl mt-4">
-          {{ "Lista de suscriptores" }}
+    <!-- Modal -->
+    <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="bg-white p-4 rounded">
+        <h2 class="text-2xl font-bold">
+          Detalles del Suscriptor: {{ selectedSubscriber.Id }}
         </h2>
-        <table class="mt-4 w-full border-collapse">
-          <thead>
-            <tr>
-              <th class="py-2 px-4 bg-gray-200 border-b">ID</th>
-              <th class="py-2 px-4 bg-gray-200 border-b">Nombre</th>
-              <th class="py-2 px-4 bg-gray-200 border-b">Email</th>
-              <th class="py-2 px-4 bg-gray-200 border-b">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let subscriber of subscribersExample"
-              class="hover:bg-gray-100"
-            >
-              <td class="py-2 px-4 border-b text-center">
-                {{ subscriber.Id }}
-              </td>
-              <td class="py-2 px-4 border-b text-center">
-                {{ subscriber.Name }}
-              </td>
-              <td class="py-2 px-4 border-b text-center">
-                {{ subscriber.Email }}
-              </td>
-              <td class="py-2 px-4 border-b text-center">
-                <button
-                  (click)="showSubscriberDetails(subscriber.Id)"
-                  class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded my-1"
-                >
-                  Ver detalles
-                </button>
-                <span class="mx-2"></span>
-                <button
-                  class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded"
-                >
-                  Actualizar
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div *ngIf="subscriberDetails" class="mt-4">
-          <h2 class="text-2xl font-bold">
-            Detalles del Suscriptor {{ subscriberDetails.Id }}
-          </h2>
-          <div class="mt-2">
-            <p>
-              <strong>Nombre:</strong> {{ subscriberDetails.Name }}
-            </p>
-            <p>
-              <strong>Email:</strong> {{ subscriberDetails.Email }}
-            </p>
-            <p>
-              <strong>Public ID:</strong> {{ subscriberDetails.PublicId }}
-            </p>
-            <p>
-              <strong>Country:</strong> {{ subscriberDetails.CountryName }}
-            </p>
-            <p>
-              <strong>Phone Number:</strong> {{ subscriberDetails.PhoneNumber }}
-            </p>
-            <p>
-              <strong>Subscription State Description:</strong>
-              {{ subscriberDetails.SubscriptionStateDescription }}
-            </p>
-          </div>
-          <button class="ml-auto bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded">
-            Actualizar
-          </button>
+        <div class="mt-2">
+          <p>Nombre del suscriptor: {{ selectedSubscriber.Name }}</p>
+          <p>Area: {{ selectedSubscriber.Area }}</p>
+          <p>País: {{ selectedSubscriber.CountryName }}</p>
+          <p>Correo electrónico: {{ selectedSubscriber.Email }}</p>
+          <p>Número telefónico: {{ selectedSubscriber.PhoneCodeAndNumber }}</p>
+          <p>Estado de Suscripción: {{ selectedSubscriber.SubscriptionStateSubscriptionStateDescription }}</p>
         </div>
+        <button (click)="closeModal()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Cerrar</button>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
 </div>
+

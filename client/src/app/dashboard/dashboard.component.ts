@@ -1,65 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
-import { SubscriberExample } from '../dataExample';
 import { Router } from '@angular/router';
 
+import { NavbarComponent } from './navbar/navbar.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit{
+
+export class DashboardComponent implements OnInit, AfterViewInit{
+  @ViewChild('navbar') navbar: NavbarComponent | undefined;
 
   subscribers: any[] = [];
-  subscribersExample: any[] = [];
-  subscriberDetails: any = {};
   username: any;
+  subscriberDetails: any = [];
+  selectedSubscriber: any;
+  isModalOpen: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.getSubscribers();
-    this.subscribersExample = SubscriberExample.Data;
-    this.subscriberDetails = this.getSubscriberById(7914);
-    this.username = this.apiService.getUserName();
   }
+
+  ngAfterViewInit(): void {
+    // Código que se ejecutará después de que se hayan inicializado las vistas
+    // Puedes acceder a los elementos del componente hijo aquí
+    // console.log('Navbar Component:', this.navbar);
+  }
+
+
   getSubscribers() {
-    this.apiService.getSubscribers('Carlos', 1, 2, 'PublicId', 0).subscribe((response) => {
-      this.subscribers = response.Data;
-      console.log('data', response.Data);
-      console.log('count', response.Count);
-    }, 
-    (error: any) => {
-      console.log('getSubscribers', error);
-    });
+    this.apiService
+      .getSubscribers('', 1, 50, 'PublicId', 0)
+      .then((response: any) => {
+        if (Array.isArray(response.Data)) {
+          this.subscribers = response.Data;
+          console.log(this.subscribers);
+        } else {
+          console.error('Invalid response data. Expected an array.');
+        }
+      })
+      .catch((error: any) => console.error(error));
   }
 
-  getSubscriberById(id: number) {
-    try {
-      this.apiService.getSubscriberById(id).subscribe((response) => {
-        this.subscriberDetails = response;
-
-        console.log(response);
-
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  getSubscriberById(Id: number) {
+      this.subscriberDetails = this.subscriberDetails.find((sub: { Id: any; }) => sub.Id === Id);
   }
 
-  showSubscriberDetails(Id: number) {
-    this.subscriberDetails = this.subscribersExample.find((s) => s.Id === Id);
+  openModal(subscriber: any) {
+    this.selectedSubscriber  = subscriber;
+    this.isModalOpen = true;
   }
 
-  logout() {
-    this.router.navigate(['/login']);
+  closeModal() {
+    this.selectedSubscriber = null;
+    this.isModalOpen = false;
   }
-  // getCountries() {
-  //   this.apiService.getCountries().subscribe((data) => {
-  //     console.log(data);
-  //   });
-  // }
 
   }
-  
-// }
