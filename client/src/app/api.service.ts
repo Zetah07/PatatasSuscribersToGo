@@ -71,7 +71,7 @@ export class ApiService {
     try {
       const response = await axios.post(`${this.baseUrl}/subscribers`, {
         Subscribers: subscribers,
-        headers: { Authorization: `Bearer ${this.token}` },
+        headers: { Authorization: `Bearer ${this.token}`} 
       });
       return response.data;
     } catch (error) {

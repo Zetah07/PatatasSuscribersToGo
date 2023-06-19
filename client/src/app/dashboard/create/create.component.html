@@ -1,1 +1,51 @@
-<p>create works!</p>
+<div class="flex">
+    <app-navbar class="w-1/6"></app-navbar>
+    <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
+      <button class="home-button absolute top-4 right-4">Home</button>
+  
+      <form [formGroup]="subscriberForm" (ngSubmit)="onSubmit()" class="mt-4">
+        <div class="mb-4">
+          <label for="nombre" class="block">Nombre:</label>
+          <input type="text" id="nombre" formControlName="nombre" required class="w-full border border-gray-300 rounded px-4 py-2">
+          <div *ngIf="subscriberForm?.get('nombre')?.errors?.['required']" class="text-red-500">Este campo es obligatorio</div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="email" class="block">Email:</label>
+          <input type="email" id="email" formControlName="email" required class="w-full border border-gray-300 rounded px-4 py-2">
+          <div *ngIf="subscriberForm?.get('email')?.errors?.['required']" class="text-red-500">Este campo es obligatorio</div>
+          <div *ngIf="subscriberForm?.get('email')?.errors?.['email']" class="text-red-500">El formato de email no es válido</div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="phoneNumber" class="block">Número de teléfono:</label>
+          <input type="text" id="phoneNumber" formControlName="phoneNumber" required class="w-full border border-gray-300 rounded px-4 py-2">
+          <div *ngIf="subscriberForm.get('phoneNumber')?.errors?.['required']" class="text-red-500">Este campo es obligatorio</div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="country" class="block">País:</label>
+          <input type="text" id="country" formControlName="country" required class="w-full border border-gray-300 rounded px-4 py-2">
+          <div *ngIf="subscriberForm.get('country')?.errors?.['required']" class="text-red-500">Este campo es obligatorio</div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="jobTitle" class="block">Título del trabajo:</label>
+          <input type="text" id="jobTitle" formControlName="jobTitle" class="w-full border border-gray-300 rounded px-4 py-2">
+        </div>
+  
+        <div class="mb-4">
+          <label for="area" class="block">Área:</label>
+          <input type="text" id="area" formControlName="area" class="w-full border border-gray-300 rounded px-4 py-2">
+        </div>
+  
+        <div class="mb-4">
+          <label for="topics" class="block">Temas:</label>
+          <input type="text" id="topics" formControlName="topics" class="w-full border border-gray-300 rounded px-4 py-2">
+        </div>
+  
+        <button type="submit" [disabled]="subscriberForm.invalid" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Crear suscriptor</button>
+      </form>
+    </main>
+  </div>
+  

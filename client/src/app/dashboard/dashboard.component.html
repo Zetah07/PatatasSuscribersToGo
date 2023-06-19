@@ -1,32 +1,41 @@
-<div class="flex">
-  <app-navbar class="w-1/6"></app-navbar>
-  <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
-    <h2 class="text-2xl font-bold mb-4">
-      {{ "Lista de suscriptores" }}
-    </h2>
-    <table class="border-collapse w-full">
-      <thead>
-        <tr>
-          <th class="border px-4 py-2">ID</th>
-          <th class="border px-4 py-2">Nombre</th>
+<div class="flex mx-auto">
+  <app-navbar></app-navbar>
+  <div class="overflow-y-auto max-h-screen w-full">
+    <main class="main-content p-4 flex flex-col">
+      <h2 class="text-2xl text-center font-bold mb-4 text-ColorNav">
+        {{ "Lista de suscriptores" }}
+      </h2>
+      <table class="border-collapse w-full">
+        <thead>
+          <tr class="bg-slate-300 text-ColorNav">
+            <th class="border px-4 py-2">ID</th>
+            <th class="border px-4 py-2">Nombre</th>
           <th class="border px-4 py-2">Email</th>
           <th class="border px-4 py-2">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let subscriber of subscriberDetails" class="border">
-          <td class="border px-4 py-2">{{ subscriber.Id }}</td>
+        <tr *ngFor="let subscriber of subscribers" class="border hover:bg-slate-200">
+          <td class="border px-4 py-2 hover:text-ColorHover">{{ subscriber.Id }}</td>
           <td class="border px-4 py-2">{{ subscriber.Name }}</td>
           <td class="border px-4 py-2">{{ subscriber.Email }}</td>
-          <td class="border px-4 py-2">
-            <button (click)="openModal(subscriber)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver detalles</button>
+          <td class="border px-4 py-2 text-center">
+            <button (click)="openModal(subscriber)" class="py-2 px-4 hover:text-ColorHover">
+              <i class="fa-regular fa-eye"></i>
+            </button>
             <span class="mx-2">|</span>
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
+            <button class="py-2 px-4 hover:text-ColorNav">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <span class="mx-2">|</span>
+            <button class="py-2 px-4 hover:text-ColorNav">
+              <i class="fa-solid fa-x"></i>
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-
+    
     <div *ngIf="selectedSubscriber" class="mt-4">
       <h2 class="text-2xl font-bold">
         Detalles del Suscriptor: {{ selectedSubscriber.Id }}
@@ -41,7 +50,7 @@
       </div>
       <button (click)="closeModal()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
     </div>
-
+    
     <!-- Modal -->
     <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white p-4 rounded">
@@ -60,5 +69,6 @@
       </div>
     </div>
   </main>
+</div>
 </div>
 

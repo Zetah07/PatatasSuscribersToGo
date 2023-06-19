@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   styleUrls: ['./dashboard.component.css'],
 })
 
-export class DashboardComponent implements OnInit, AfterViewInit{
+export class DashboardComponent implements OnInit{
   @ViewChild('navbar') navbar: NavbarComponent | undefined;
 
   subscribers: any[] = [];
@@ -24,11 +24,6 @@ export class DashboardComponent implements OnInit, AfterViewInit{
     this.getSubscribers();
   }
 
-  ngAfterViewInit(): void {
-    // Código que se ejecutará después de que se hayan inicializado las vistas
-    // Puedes acceder a los elementos del componente hijo aquí
-    // console.log('Navbar Component:', this.navbar);
-  }
 
 
   getSubscribers() {

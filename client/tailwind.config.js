@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors:{
         'ColorNav': '#705f34',
+        'ColorHover': '#8e7b3a',
       }
     },
   },
