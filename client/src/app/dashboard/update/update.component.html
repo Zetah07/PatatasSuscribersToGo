@@ -1,32 +1,76 @@
-
-<div *ngIf="subscriber" class="mt-4">
-  <button (click)="goHome()" class="home-button absolute text-ColorNav text-xl top-4 right-4">
-    <i class="fa-solid fa-house"></i>
-  </button>
-  <h2 class="text-2xl font-bold text-center text-ColorNav">Detalles del Suscriptor: {{ subscriber.Id }}</h2>
-  <div class="mt-4">
-    <label for="FirstName" class="block">Nombre:</label>
-    <input type="text" id="FirstName" [(ngModel)]="subscriber.Name" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
-  </div>
-  <div class="mt-4">
-    <label for="Email" class="block">Email:</label>
-    <input type="email" id="Email" [(ngModel)]="subscriber.Email" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
-  </div>
-  <div class="mt-4">
-    <label for="PhoneNumber" class="block">Teléfono:</label>
-    <input type="text" id="PhoneNumber" [(ngModel)]="subscriber.PhoneNumber" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
-  </div>
-  <div class="mt-4">
-    <label for="JobTitle" class="block">Puesto:</label>
-    <input type="text" id="JobTitle" [(ngModel)]="subscriber.JobTitle" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
-  </div>
-  <div class="mt-4">
-    <label for="Area" class="block">Area:</label>
-    <input type="text" id="Area" [(ngModel)]="subscriber.Area" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
-  </div>
-  <div class="mt-4">
-    <label for="Topics" class="block">Temas:</label>
-    <input type="text" id="Topics" [(ngModel)]="subscriber.Topics" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
-  </div>
-  <button (click)="updateSubscriber()" class="mt-4 px-4 py-2 bg-ColorHover text-white rounded hover:bg-ColorNav">Actualizar</button>
+<div class="flex">
+  <app-navbar class="w-1/6"></app-navbar>
+  <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
+    <div *ngIf="subscriber" class="mt-4">
+      <button
+        (click)="goHome()"
+        class="home-button absolute text-ColorNav text-xl top-4 right-4"
+      >
+        <i class="fa-solid fa-house"></i>
+      </button>
+      <h2 class="text-2xl font-bold text-center text-ColorNav">
+        Detalles del Suscriptor: {{ subscriber.Id }}
+      </h2>
+      <div class="mt-4">
+        <label for="FirstName" class="block">Nombre:</label>
+        <input
+          type="text"
+          id="FirstName"
+          [(ngModel)]="subscriber.Name"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="Email" class="block">Email:</label>
+        <input
+          type="email"
+          id="Email"
+          [(ngModel)]="subscriber.Email"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="PhoneNumber" class="block">Teléfono:</label>
+        <input
+          type="text"
+          id="PhoneNumber"
+          [(ngModel)]="subscriber.PhoneNumber"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="JobTitle" class="block">Puesto:</label>
+        <input
+          type="text"
+          id="JobTitle"
+          [(ngModel)]="subscriber.JobTitle"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="Area" class="block">Area:</label>
+        <input
+          type="text"
+          id="Area"
+          [(ngModel)]="subscriber.Area"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="Topics" class="block">Temas:</label>
+        <input
+          type="text"
+          id="Topics"
+          [(ngModel)]="subscriber.Topics"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1"
+        />
+      </div>
+      <button
+        (click)="updateSubscriber()"
+        class="mt-4 px-4 py-2 bg-ColorHover text-white rounded hover:bg-ColorNav"
+      >
+        Actualizar
+      </button>
+    </div>
+  </main>
 </div>

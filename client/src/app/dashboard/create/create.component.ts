@@ -11,13 +11,12 @@ import { Router } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
   subscriberForm!: FormGroup;
-  
   submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService, 
-    private toastr: ToastrService, 
+    private apiService: ApiService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -26,6 +25,7 @@ export class CreateComponent implements OnInit {
       Name: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       PhoneNumber: ['', Validators.required],
+      CountryCode: ['', Validators.required],
       Country: ['', Validators.required],
       JobTitle: [''],
       Area: [''],
@@ -34,21 +34,32 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     if (this.subscriberForm.valid) {
-      const formData = this.subscriberForm.value;
-      this.apiService.createSubscribers(formData)
-      .then((response: any) => {
-        console.log('.then: response ', response);
-        this.toastr.success('Suscriptor creado exitosamente', 'Éxito');
-        this.subscriberForm.reset();
-      }).catch((error: any) => {
-        console.log('.catch: error ', error);
-        this.toastr.error('No se pudo crear el suscriptor', 'Error');
-      });
-      } else{
-        console.error('Invalid form data');
-      }
+      const formData = {
+        name: this.subscriberForm.value.Name,
+        email: this.subscriberForm.value.Email,
+        phoneNumber: this.subscriberForm.value.PhoneNumber,
+        countryCode: this.subscriberForm.value.CountryCode.toUpperCase().substring(2, 3),
+        country: this.subscriberForm.value.Country,
+        jobTitle: this.subscriberForm.value.JobTitle,
+        area: this.subscriberForm.value.Area,
+        topics: this.subscriberForm.value.Topics,
+      };
+
+      this.apiService.addSubscriber(formData).then(
+        (response: any) => {
+          console.log('Response:', response);
+          this.toastr.success('Suscriptor creado exitosamente', 'Éxito');
+          this.subscriberForm.reset();
+        },
+        (error: any) => {
+          console.log('Error:', error);
+          this.toastr.error('No se pudo crear el suscriptor', 'Error');
+        }
+      );
+    } else {
+      console.error('Invalid form data');
+    }
   }
 
   goHome() {

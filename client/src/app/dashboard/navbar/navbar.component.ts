@@ -10,7 +10,10 @@ import { ApiService } from 'src/app/api.service';
 export class NavbarComponent {
   username: any;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(
+    private apiService: ApiService, 
+    private router: Router, 
+    ) { }
 
   ngOnInit(): void {
     this.username = this.apiService.getUserName();

@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
-import { NavbarComponent } from './navbar/navbar.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,20 +10,24 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 
 export class DashboardComponent implements OnInit{
-  @ViewChild('navbar') navbar: NavbarComponent | undefined;
 
   subscribers: any[] = [];
   subscriberDetails: any = [];
   selectedSubscriber: any;
   isModalOpen: boolean = false;
+  isModalDeleteOpen: boolean = false;
+  isConfirmationStep: boolean = false;
+  selectedSubscriberId!: number;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(
+    private apiService: ApiService, 
+    private router: Router, 
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit(): void {
     this.getSubscribers();
   }
-
-
 
   getSubscribers() {
     this.apiService
@@ -42,19 +46,42 @@ export class DashboardComponent implements OnInit{
   getSubscriberById(Id: number) {
       this.subscriberDetails = this.subscriberDetails.find((sub: { Id: any; }) => sub.Id === Id);
   }
-
-  openModal(subscriber: any) {
-    this.selectedSubscriber  = subscriber;
-    this.isModalOpen = true;
+  
+  getUpdatedSubscribers(id: number) {
+    this.router.navigate(['/update', id]);
   }
-
+  
+  deleteSubscriber(id: number) {
+    this.apiService
+      .deleteSubscriberById(id)
+      .then((response: any) => {
+          this.getSubscribers();
+          this.toastr.success('Suscriptor eliminado exitosamente', 'Éxito');
+          this.closeModal();
+      })
+      .catch((error: any) => {
+        console.error(error);
+        this.toastr.error('No se pudo eliminar el suscriptor', 'Error');
+        this.closeModal();
+      });
+  }
+  
+  Modaldelete(id: number) {
+    this.selectedSubscriberId = id;
+    this.isModalDeleteOpen = true;
+  }
+  closeModaldel() {
+    this.isModalDeleteOpen = false;
+  }
+  
+  
+    openModal(subscriber: any) {
+      this.selectedSubscriber  = subscriber;
+      this.isModalOpen = true;
+    }
   closeModal() {
     this.selectedSubscriber = null;
     this.isModalOpen = false;
   }
-
-  getUpdatedSubscribers(id: number) {
-    this.router.navigate(['/update', id]);
-  }
-
+  
   }

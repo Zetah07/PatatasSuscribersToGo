@@ -4,15 +4,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './users/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateComponent } from './dashboard/create/create.component';
 import { NavbarComponent } from './dashboard/navbar/navbar.component';
-import { DeleteComponent } from './dashboard/delete/delete.component';
 import { UpdateComponent } from './dashboard/update/update.component';
 import { RegisterComponent } from './users/register/register.component';
+import { CountriesComponent } from './dashboard/countries/countries.component';
 
 
 @NgModule({
@@ -22,12 +23,14 @@ import { RegisterComponent } from './users/register/register.component';
     DashboardComponent,
     CreateComponent,
     NavbarComponent,
-    DeleteComponent,
     UpdateComponent,
     RegisterComponent,
+
+    CountriesComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule, 
     ReactiveFormsModule, 
     RouterModule, 

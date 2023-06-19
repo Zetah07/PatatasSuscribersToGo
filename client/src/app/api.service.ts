@@ -67,41 +67,54 @@ export class ApiService {
     }
   }
 
-  async createSubscribers(subscribers: any[]) {
+  async addSubscriber(subscribers: any) {
     try {
-      const response = await axios.post(`${this.baseUrl}/subscribers`, {
+      const response = await axios.post(
+        `${this.baseUrl}/subscribers`,
         subscribers,
-        headers: { Authorization: `Bearer ${this.token}`} 
-      });
+        { headers: { Authorization: `Bearer ${this.token}` } }
+      );
+      console.log('apiservice',response.data);
       return response.data;
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.log(error);
     }
   }
 
   async deleteSubscriberById(id: number) {
-    try{
-    const response = await axios.delete(`${this.baseUrl}/subscribers/${id}`,{
-        headers: { Authorization: `Bearer ${this.token}` },
-      });
-      return response.data;
-  }catch(error){
-    console.error(error);
+    const response = await axios.delete(`${this.baseUrl}/subscribers/${id}`, {
+      headers: { Authorization: `Bearer ${this.token}` },
+    });
+    console.log('Id delete', id, response);
+    return response;
   }
-}
+  
 
   async updateSubscriberById(id: number, subscriber: any) {
     try {
       const response = await axios.put(`${this.baseUrl}/subscribers/${id}`, {
         Subscriber: subscriber,
         headers: { Authorization: `Bearer ${this.token}` },
-    });
-    return response.data;
+      });
+      return response.data;
     } catch (error) {
       console.error(error);
     }
-}
+  }
+
+  async getCountries(params: any): Promise<any> {
+    return axios.get(`${this.baseUrl}/countries`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      },
+      params: params
+    })
+      .then(response => response.data)
+      .catch(error => {
+        throw new Error(error)
+      });
+    }
+  
 
   getUserName() {
     return this.Username;
