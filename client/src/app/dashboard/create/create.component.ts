@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -9,39 +11,47 @@ import { ApiService } from 'src/app/api.service';
 })
 export class CreateComponent implements OnInit {
   subscriberForm!: FormGroup;
-  // isLoading: boolean = false;
+  
   submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService, 
+    private toastr: ToastrService, 
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.subscriberForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
-      country: ['', Validators.required],
-      jobTitle: [''],
-      area: [''],
-      topics: [''],
+      Name: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: ['', Validators.required],
+      Country: ['', Validators.required],
+      JobTitle: [''],
+      Area: [''],
+      Topics: [''],
     });
   }
 
   onSubmit() {
     this.submitted = true;
-    // this.isLoading = true;
-    if (this.subscriberForm?.valid) {
-      const formData = this.subscriberForm?.value;
+    if (this.subscriberForm.valid) {
+      const formData = this.subscriberForm.value;
       this.apiService.createSubscribers(formData)
       .then((response: any) => {
         console.log('.then: response ', response);
-        // this.isLoading = false;
-        this.subscriberForm?.reset();
-      })
+        this.toastr.success('Suscriptor creado exitosamente', 'Éxito');
+        this.subscriberForm.reset();
+      }).catch((error: any) => {
+        console.log('.catch: error ', error);
+        this.toastr.error('No se pudo crear el suscriptor', 'Error');
+      });
       } else{
         console.error('Invalid form data');
       }
+  }
+
+  goHome() {
+    this.router.navigate(['/home']);
   }
 }

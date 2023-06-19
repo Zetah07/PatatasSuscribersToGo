@@ -42,4 +42,8 @@ export class UpdateComponent implements OnInit {
       this.toastr.error('No se pudo actualizar el suscriptor', 'Error');
     }
   }
+
+  goHome() {
+    this.router.navigate(['/home']);
+  }
 }

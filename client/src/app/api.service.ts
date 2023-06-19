@@ -70,12 +70,13 @@ export class ApiService {
   async createSubscribers(subscribers: any[]) {
     try {
       const response = await axios.post(`${this.baseUrl}/subscribers`, {
-        Subscribers: subscribers,
+        subscribers,
         headers: { Authorization: `Bearer ${this.token}`} 
       });
       return response.data;
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 
@@ -106,7 +107,7 @@ export class ApiService {
     return this.Username;
   }
 
-  async setToken(token: string, refreshToken: string) {
+  setToken(token: string) {
     this.token = token;
   }
 }

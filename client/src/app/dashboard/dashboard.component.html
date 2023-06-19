@@ -24,7 +24,7 @@
               <i class="fa-regular fa-eye"></i>
             </button>
             <span class="mx-2">|</span>
-            <a [routerLink]="['/update', subscriber.Id]" target="_blank" class="hover:text-ColorHover inline-block py-2 px-4">
+            <a (click)="getUpdatedSubscribers(subscriber.Id)" class="hover:text-ColorHover inline-block py-2 px-4">
               <i class="fa-solid fa-pen"></i>
             </a>
             <span class="mx-2">|</span>
@@ -35,37 +35,21 @@
         </tr>
       </tbody>
     </table>
-    
-    <div *ngIf="selectedSubscriber" class="mt-4">
-      <h2 class="text-2xl font-bold">
-        Detalles del Suscriptor: {{ selectedSubscriber.Id }}
-      </h2>
-      <div class="mt-2">
-        <p>Nombre del suscriptor: {{ selectedSubscriber.Name }}</p>
-        <p>Area: {{ selectedSubscriber.Area }}</p>
-        <p>País: {{ selectedSubscriber.CountryName }}</p>
-        <p>Correo electrónico: {{ selectedSubscriber.Email }}</p>
-        <p>Número telefónico: {{ selectedSubscriber.PhoneCodeAndNumber }}</p>
-        <p>Estado de Suscripción: {{ selectedSubscriber.SubscriptionStateSubscriptionStateDescription }}</p>
-      </div>
-      <button (click)="closeModal()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
-    </div>
-    
-    <!-- Modal -->
+
     <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div class="bg-white p-4 rounded">
-        <h2 class="text-2xl font-bold">
+      <div class="bg-white p-8 rounded mx-8">
+        <h2 class="text-2xl text-center font-bold text-ColorNav">
           Detalles del Suscriptor: {{ selectedSubscriber.Id }}
         </h2>
         <div class="mt-2">
-          <p>Nombre del suscriptor: {{ selectedSubscriber.Name }}</p>
-          <p>Area: {{ selectedSubscriber.Area }}</p>
-          <p>País: {{ selectedSubscriber.CountryName }}</p>
-          <p>Correo electrónico: {{ selectedSubscriber.Email }}</p>
-          <p>Número telefónico: {{ selectedSubscriber.PhoneCodeAndNumber }}</p>
-          <p>Estado de Suscripción: {{ selectedSubscriber.SubscriptionStateSubscriptionStateDescription }}</p>
+          <p><b>Nombre del suscriptor:</b> {{ selectedSubscriber.Name }}</p>
+          <p><b>Area:</b> {{ selectedSubscriber.Area }}</p>
+          <p><b>Pais:</b> {{ selectedSubscriber.CountryName }}</p>
+          <p><b>Correo electrónico:</b> {{ selectedSubscriber.Email }}</p>
+          <p><b>Número telefónico:</b> {{ selectedSubscriber.PhoneCodeAndNumber }}</p>
+          <p><b>Estado de Suscripción:</b> {{ selectedSubscriber.SubscriptionStateSubscriptionStateDescription ? selectedSubscriber.SubscriptionStateSubscriptionStateDescription : 'Por Definir' }}</p>
         </div>
-        <button (click)="closeModal()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Cerrar</button>
+        <button (click)="closeModal()" class="mt-4 bg-ColorHover hover:bg-ColorNav text-white font-bold py-2 px-4 rounded">Cerrar</button>
       </div>
     </div>
   </main>

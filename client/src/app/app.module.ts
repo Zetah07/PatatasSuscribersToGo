@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './users/login/login.component';
@@ -31,7 +31,8 @@ import { RegisterComponent } from './users/register/register.component';
     AppRoutingModule, 
     ReactiveFormsModule, 
     RouterModule, 
-    FormsModule 
+    FormsModule, 
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <div class="flex">
   <app-navbar class="w-1/6"></app-navbar>
   <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
-    <button class="home-button absolute text-ColorNav text-xl top-4 right-4">
+    <button (click)="goHome()" class="home-button absolute text-ColorNav text-xl top-4 right-4">
       <i class="fa-solid fa-house"></i>
     </button>
 
@@ -12,17 +12,17 @@
 
     <form [formGroup]="subscriberForm" (ngSubmit)="onSubmit()" class="mt-4">
       <div class="mb-4">
-        <label for="nombre" class="block">Nombre:</label>
+        <label for="Name" class="block">Nombre: </label>
         <input
           type="text"
-          id="nombre"
-          formControlName="nombre"
+          id="Name"
+          formControlName="Name"
           required
           class="w-full border border-gray-300 rounded px-4 py-2"
-          (blur)="subscriberForm.get('nombre')?.markAsTouched()"
+          (blur)="subscriberForm.get('Name')?.markAsTouched()"
         />
         <div
-          *ngIf="subscriberForm?.get('nombre')?.invalid && (subscriberForm.get('nombre')?.touched || submitted)"
+          *ngIf="subscriberForm?.get('Name')?.invalid && (subscriberForm.get('Name')?.touched || submitted)"
           class="text-red-500"
         >
           Este campo es obligatorio
@@ -30,23 +30,23 @@
       </div>
       
       <div class="mb-4">
-        <label for="email" class="block">Email:</label>
+        <label for="Email" class="block">Email:</label>
         <input
-          type="email"
-          id="email"
-          formControlName="email"
+          type="Email"
+          id="Email"
+          formControlName="Email"
           required
           class="w-full border border-gray-300 rounded px-4 py-2"
-          (blur)="subscriberForm.get('email')?.markAsTouched()"
+          (blur)="subscriberForm.get('Email')?.markAsTouched()"
         />
         <div
-          *ngIf="subscriberForm?.get('email')?.errors?.['required'] && (subscriberForm.get('email')?.touched || submitted)"
+          *ngIf="subscriberForm?.get('Email')?.errors?.['required'] && (subscriberForm.get('Email')?.touched || submitted)"
           class="text-red-500"
         >
           Este campo es obligatorio
         </div>
         <div
-          *ngIf="subscriberForm?.get('email')?.errors?.['email'] && (subscriberForm.get('email')?.touched || submitted)"
+          *ngIf="subscriberForm?.get('Email')?.errors?.['Email'] && (subscriberForm.get('Email')?.touched || submitted)"
           class="text-red-500"
         >
           El formato de email no es válido
@@ -54,17 +54,17 @@
       </div>
       
       <div class="mb-4">
-        <label for="phoneNumber" class="block">Número de teléfono:</label>
+        <label for="PhoneNumber" class="block">Número de teléfono:</label>
         <input
           type="text"
-          id="phoneNumber"
-          formControlName="phoneNumber"
+          id="PhoneNumber"
+          formControlName="PhoneNumber"
           required
           class="w-full border border-gray-300 rounded px-4 py-2"
-          (blur)="subscriberForm.get('phoneNumber')?.markAsTouched()"
+          (blur)="subscriberForm.get('PhoneNumber')?.markAsTouched()"
         />
         <div
-          *ngIf="subscriberForm.get('phoneNumber')?.errors?.['required'] && (subscriberForm.get('phoneNumber')?.touched || submitted)"
+          *ngIf="subscriberForm.get('PhoneNumber')?.errors?.['required'] && (subscriberForm.get('PhoneNumber')?.touched || submitted)"
           class="text-red-500"
         >
           Este campo es obligatorio
@@ -73,20 +73,20 @@
       
 
       <div class="mb-4">
-        <label for="country" class="block">País:</label>
+        <label for="Country" class="block">País:</label>
         <input
           type="text"
-          id="country"
-          formControlName="country"
+          id="Country"
+          formControlName="Country"
           required
           class="w-full border border-gray-300 rounded px-4 py-2"
-          (blur)="subscriberForm.get('country')?.markAsTouched()"
+          (blur)="subscriberForm.get('Country')?.markAsTouched()"
         />
         <div
           *ngIf="
-            subscriberForm?.get('country') &&
-            subscriberForm.get('country')!.invalid &&
-            (subscriberForm.get('country')!.touched || submitted)
+            subscriberForm?.get('Country') &&
+            subscriberForm.get('Country')!.invalid &&
+            (subscriberForm.get('Country')!.touched || submitted)
           "
           class="text-red-500"
         >
@@ -95,11 +95,11 @@
       </div>
 
       <div class="mb-4">
-        <label for="jobTitle" class="block">Título del trabajo:</label>
+        <label for="JobTitle" class="block">Título del trabajo:</label>
         <input
           type="text"
-          id="jobTitle"
-          formControlName="jobTitle"
+          id="JobTitle"
+          formControlName="JobTitle"
           class="w-full border border-gray-300 rounded px-4 py-2"
         />
       </div>
@@ -115,11 +115,11 @@
       </div>
 
       <div class="mb-4">
-        <label for="topics" class="block">Temas:</label>
+        <label for="Topics" class="block">Temas:</label>
         <input
           type="text"
-          id="topics"
-          formControlName="topics"
+          id="Topics"
+          formControlName="Topics"
           class="w-full border border-gray-300 rounded px-4 py-2"
         />
       </div>

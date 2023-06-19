@@ -1,5 +1,8 @@
 
 <div *ngIf="subscriber" class="mt-4">
+  <button (click)="goHome()" class="home-button absolute text-ColorNav text-xl top-4 right-4">
+    <i class="fa-solid fa-house"></i>
+  </button>
   <h2 class="text-2xl font-bold text-center text-ColorNav">Detalles del Suscriptor: {{ subscriber.Id }}</h2>
   <div class="mt-4">
     <label for="FirstName" class="block">Nombre:</label>

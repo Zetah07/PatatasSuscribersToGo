@@ -53,4 +53,8 @@ export class DashboardComponent implements OnInit{
     this.isModalOpen = false;
   }
 
+  getUpdatedSubscribers(id: number) {
+    this.router.navigate(['/update', id]);
+  }
+
   }
