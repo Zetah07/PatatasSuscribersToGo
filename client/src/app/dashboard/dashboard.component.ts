@@ -13,7 +13,6 @@ export class DashboardComponent implements OnInit{
   @ViewChild('navbar') navbar: NavbarComponent | undefined;
 
   subscribers: any[] = [];
-  username: any;
   subscriberDetails: any = [];
   selectedSubscriber: any;
   isModalOpen: boolean = false;

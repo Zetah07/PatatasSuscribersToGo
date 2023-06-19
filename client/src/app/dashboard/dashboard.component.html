@@ -20,15 +20,15 @@
           <td class="border px-4 py-2">{{ subscriber.Name }}</td>
           <td class="border px-4 py-2">{{ subscriber.Email }}</td>
           <td class="border px-4 py-2 text-center">
-            <button (click)="openModal(subscriber)" class="py-2 px-4 hover:text-ColorHover">
+            <button (click)="openModal(subscriber)" class="py-2 px-4 font-bold hover:text-ColorHover">
               <i class="fa-regular fa-eye"></i>
             </button>
             <span class="mx-2">|</span>
-            <button class="py-2 px-4 hover:text-ColorNav">
+            <a [routerLink]="['/update', subscriber.Id]" target="_blank" class="hover:text-ColorHover inline-block py-2 px-4">
               <i class="fa-solid fa-pen"></i>
-            </button>
+            </a>
             <span class="mx-2">|</span>
-            <button class="py-2 px-4 hover:text-ColorNav">
+            <button class="py-2 px-4 font-bold hover:text-ColorNav">
               <i class="fa-solid fa-x"></i>
             </button>
           </td>

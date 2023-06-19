@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpateComponent } from './upate.component';
+import { UpdateComponent } from './update.component';
 
 describe('UpateComponent', () => {
-  let component: UpateComponent;
-  let fixture: ComponentFixture<UpateComponent>;
+  let component: UpdateComponent;
+  let fixture: ComponentFixture<UpdateComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UpateComponent]
+      declarations: [UpdateComponent]
     });
-    fixture = TestBed.createComponent(UpateComponent);
+    fixture = TestBed.createComponent(UpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

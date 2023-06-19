@@ -102,7 +102,7 @@ export class ApiService {
     }
 }
 
-  async getUserName() {
+  getUserName() {
     return this.Username;
   }
 

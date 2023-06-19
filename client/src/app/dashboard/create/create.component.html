@@ -1,7 +1,9 @@
 <div class="flex">
     <app-navbar class="w-1/6"></app-navbar>
     <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
-      <button class="home-button absolute top-4 right-4">Home</button>
+      <button class="home-button absolute text-ColorNav text-xl top-4 right-4">
+        <i class="fa-solid fa-house"></i>
+      </button>
   
       <form [formGroup]="subscriberForm" (ngSubmit)="onSubmit()" class="mt-4">
         <div class="mb-4">

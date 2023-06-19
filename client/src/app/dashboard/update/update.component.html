@@ -1,0 +1,14 @@
+
+<div *ngIf="subscriber">
+    <h2>Detalles del Suscriptor: {{ subscriber.Id }}</h2>
+    <!-- Mostrar los detalles del suscriptor en campos de entrada o elementos de visualización -->
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" [(ngModel)]="subscriber.Name">
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="subscriber.Email">
+    <br>
+    <!-- Otros campos de actualización -->
+  
+    <button (click)="updateSubscriber()">Actualizar</button>
+  </div>

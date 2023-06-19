@@ -1,33 +1,31 @@
 <div class="container">
-    <aside class="sidebar min-h-screen text-gray-300">
-        <h2 class="sidebar-title">Patata ToGo</h2>
-        <div class="sidebar-content">
-            <div class="sidebar-links">
-                <li class="sidebar-link">
-                    <a routerLink="/create" class="hover:text-yellow-500">Crear un suscriptor</a>
-                </li>
-                <br/>
-                <li class="sidebar-link">
-                    <a routerLink="/country" class="hover:text-yellow-500">Lista de Paises</a>
-                </li>
-            </div>
-            <!-- Perfil de usuario -->
-            <div class="sidebar-profile">
-                <span class="nav-image">
-                    <img src="../../assets/images/Logo.webp" alt="logo_img" />
-                </span>
-                <!-- Mensaje de bienvenida -->
-                <p class="font-thin text-gray-400">Bienvenido, {{ username }}</p>
-            </div>
+    <aside class="sidebar min-h-screen text-gray-300 overflow-hidden">
+      <h2 class="sidebar-title">Patata ToGo</h2>
+      <div class="sidebar-content">
+        <div class="sidebar-links">
+          <li class="sidebar-link">
+            <a routerLink="/create" class="hover:text-yellow-500">Crear un suscriptor</a>
+          </li>
+          <br />
+          <li class="sidebar-link">
+            <a routerLink="/country" class="hover:text-yellow-500">Lista de Paises</a>
+          </li>
         </div>
-        <div class="sidebar-footer">
-            <p class="text-sm text-gray-100 font-thin">
-                © Copyright - 2023 | Tekus SAS | Todos los derechos reservados
-            </p>
-            <!-- Botón de logout -->
-            <button class="logout-button" (click)="logout()">
-        <i class="fa-solid fa-power-off text-lg ml-2"></i> Desconectar
-      </button>
-    </div>
-</aside>
-</div>
+        <div class="sidebar-profile">
+          <span class="nav-image">
+            <img src="../../assets/images/Logo.webp" alt="logo_img" />
+          </span>
+          <p class="font-thin text-left pl-4 py-4 text-gray-300">Bienvenido,<br />{{ username }}</p>
+        </div>
+      </div>
+      <div class="sidebar-footer">
+        <p class="text-sm text-gray-100 font-thin">
+          © Copyright - 2023 | Tekus SAS | Todos los derechos reservados
+        </p>
+        
+        <button class="logout-button " (click)="logout()">
+          <i class="fa-solid fa-power-off text-lg ml-2"></i> Desconectar
+        </button>
+      </div>
+    </aside>
+  </div>
