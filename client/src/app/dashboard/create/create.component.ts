@@ -9,7 +9,8 @@ import { ApiService } from 'src/app/api.service';
 })
 export class CreateComponent implements OnInit {
   subscriberForm!: FormGroup;
-  isLoading: boolean = false;
+  // isLoading: boolean = false;
+  submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,13 +30,14 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.isLoading = true;
+    this.submitted = true;
+    // this.isLoading = true;
     if (this.subscriberForm?.valid) {
       const formData = this.subscriberForm?.value;
       this.apiService.createSubscribers(formData)
       .then((response: any) => {
         console.log('.then: response ', response);
-        this.isLoading = false;
+        // this.isLoading = false;
         this.subscriberForm?.reset();
       })
       } else{
