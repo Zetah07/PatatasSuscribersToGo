@@ -69,7 +69,7 @@ export class ApiService {
   }
 
   async addSubscriber(subscribers: any) {
-    console.log('addSubscriber', subscribers);
+    // console.log('addSubscriber', subscribers);
 
     try {
       const response = await axios.post(
@@ -79,7 +79,7 @@ export class ApiService {
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -87,7 +87,7 @@ export class ApiService {
     const response = await axios.delete(`${this.baseUrl}/subscribers/${id}`, {
       headers: { Authorization: `Bearer ${this.token}` },
     });
-    console.log('Id delete', id, response);
+    // console.log('Id delete', id, response);
     return response;
   }
 

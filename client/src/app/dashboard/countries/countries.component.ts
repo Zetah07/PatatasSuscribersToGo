@@ -30,10 +30,10 @@ export class CountriesComponent implements OnInit {
     this.apiService.getCountries(params)
       .then((response: any) => {
         this.countries = response.Data;
-        console.log('Countries:', this.countries);
+        // console.log('Countries:', this.countries);
       })
       .catch((error: any) => {
-        console.log('Error:', error);
+        // console.log('Error:', error);
       });
   }
 

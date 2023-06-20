@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit{
       .then((response: any) => {
         if (Array.isArray(response.Data)) {
           this.subscribers = response.Data;
-          console.log(this.subscribers);
+          // console.log(this.subscribers);
         } else {
           console.error('Invalid response data. Expected an array.');
         }

@@ -37,7 +37,7 @@ export class CreateComponent implements OnInit {
     });
 
     this.countryOptions = this.apiService.getCountryOptions();
-    console.log('que llega de aqui', this.countryOptions);
+    // console.log('que llega de aqui', this.countryOptions);
   }
 
   onSubmit() {
@@ -59,13 +59,13 @@ export class CreateComponent implements OnInit {
 
       this.apiService.addSubscriber(formData).then(
         (response: any) => {
-          console.log('Response:', response);
+          // console.log('Response:', response);
           this.toastr.success('Suscriptor creado exitosamente', 'Éxito');
           this.subscriberForm.reset();
           this.goHome();
         },
         (error: any) => {
-          console.log('Error:', error);
+          console.error('Error:', error);
           this.toastr.error('No se pudo crear el suscriptor', 'Error');
         }
       );
@@ -75,7 +75,12 @@ export class CreateComponent implements OnInit {
   }
 
   onCountryChange(event: any): void {
-    console.log('pais seleccionado ', event)
+    this.countrySelected = event.target.value;
+    this.countryCodeSeleted = this.countryOptions.filter(
+      (c) => c.Name == event.target.value
+    )[0].Code;
+    // // console.log('CODE', this.countryCodeSeleted);
+    // // console.log('COUNTRY', this.countrySelected);
   }
 
   goHome() {
