@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit{
   isModalDeleteOpen: boolean = false;
   isConfirmationStep: boolean = false;
   selectedSubscriberId!: number;
+  
 
   constructor(
     private apiService: ApiService, 
@@ -26,17 +27,23 @@ export class DashboardComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
+    const storedToken = localStorage.getItem('authToken'); // Obtén el token del almacenamiento local
+  if (storedToken) {
+    this.apiService.setToken(storedToken);
     this.getSubscribers();
+  }
     this.apiService.getCountries(
       {
         criteria: '',
         page: 1,
         count: 255,
       }
-    );
+      );
   }
 
   getSubscribers() {
+    const storedToken: string | null = localStorage.getItem('token');
+    if (storedToken) {
     this.apiService
       .getSubscribers('', 1, 50, 'PublicId', 0)
       .then((response: any) => {
@@ -48,6 +55,9 @@ export class DashboardComponent implements OnInit{
         }
       })
       .catch((error: any) => console.error(error));
+    } else {
+      console.error('Token not found in localStorage.');
+    }
   }
 
   getSubscriberById(Id: number) {

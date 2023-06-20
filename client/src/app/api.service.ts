@@ -9,9 +9,16 @@ export class ApiService {
   [x: string]: any;
   private baseUrl = 'https://lab.app.invertebrado.co/api';
   private token: string = '';
-  private refreshToken: string = '';
+  private tokenKey = 'authToken';
   public Username: string = '';
   public CountryOptions: any[] = [];
+
+  constructor() {
+    const storedToken = localStorage.getItem(this.tokenKey);
+    if (storedToken) {
+      this.token = storedToken;
+    }
+  }
 
   async login(username: string, password: string) {
     const body = {
@@ -23,8 +30,8 @@ export class ApiService {
     if (response.status === 200) {
       this.Username = response.data.FirstName + '' + response.data.LastName;
       this.token = response.data.Token;
-      this.refreshToken = response.data.RefreshToken;
-
+      console.log( 'cosas que pasan', response.data)
+      this.setToken(response.data.Token);
       return response.data;
     } else {
       return new Error('error login in');
@@ -79,13 +86,13 @@ export class ApiService {
       );
       return response.data;
     } catch (error) {
-      // console.log(error);
+      console.error(error);
     }
   }
 
   async deleteSubscriberById(id: number) {
     const response = await axios.delete(`${this.baseUrl}/subscribers/${id}`, {
-      headers: { Authorization: `Bearer ${this.token}` },
+      headers: { Authorization: `Bearer ${this.token}`},
     });
     // console.log('Id delete', id, response);
     return response;
@@ -127,5 +134,6 @@ export class ApiService {
 
   setToken(token: string) {
     this.token = token;
+    localStorage.setItem('token', token);
   }
 }
