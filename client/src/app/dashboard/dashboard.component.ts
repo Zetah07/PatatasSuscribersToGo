@@ -27,6 +27,13 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.getSubscribers();
+    this.apiService.getCountries(
+      {
+        criteria: '',
+        page: 1,
+        count: 255,
+      }
+    );
   }
 
   getSubscribers() {
@@ -73,7 +80,6 @@ export class DashboardComponent implements OnInit{
   closeModaldel() {
     this.isModalDeleteOpen = false;
   }
-  
   
     openModal(subscriber: any) {
       this.selectedSubscriber  = subscriber;

@@ -76,43 +76,15 @@
       
       <div class="mb-4">
         <label for="CountryCode" class="block">Codigo del pais:</label>
-        <input
-          type="text"
-          id="CountryCode"
-          formControlName="CountryCode"
-          placeholder="siglas del pais"
-          required
-          class="w-full border border-gray-300 rounded px-4 py-2"
-          (blur)="subscriberForm.get('CountryCode')?.markAsTouched()"
-        />
+        <select id="CountryCode" formControlName="CountryCode"class="w-full border border-gray-300 rounded px-4 py-2" (change)="onCountryChange($event)">
+          <option value="">Seleccione un código de país</option>
+    <option *ngFor="let country of countryOptions" [value]="country.Code">{{ country.Name }}</option>
+        </select>
         <div
           *ngIf="
             subscriberForm?.get('CountryCode') &&
             subscriberForm.get('CountryCode')!.invalid &&
             (subscriberForm.get('CountryCode')!.touched || submitted)
-          "
-          class="text-red-500"
-        >
-          Este campo es obligatorio
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <label for="Country" class="block">País:</label>
-        <input
-          type="text"
-          id="Country"
-          formControlName="Country"
-          placeholder="Argentina"
-          required
-          class="w-full border border-gray-300 rounded px-4 py-2"
-          (blur)="subscriberForm.get('Country')?.markAsTouched()"
-        />
-        <div
-          *ngIf="
-            subscriberForm?.get('Country') &&
-            subscriberForm.get('Country')!.invalid &&
-            (subscriberForm.get('Country')!.touched || submitted)
           "
           class="text-red-500"
         >

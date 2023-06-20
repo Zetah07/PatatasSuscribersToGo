@@ -10,7 +10,8 @@ export class ApiService {
   private baseUrl = 'https://lab.app.invertebrado.co/api';
   private token: string = '';
   private refreshToken: string = '';
-  private Username: string = '';
+  public Username: string = '';
+  public CountryOptions: any[] = [];
 
   async login(username: string, password: string) {
     const body = {
@@ -69,7 +70,7 @@ export class ApiService {
 
   async addSubscriber(subscribers: any) {
     console.log('addSubscriber', subscribers);
-    
+
     try {
       const response = await axios.post(
         `${this.baseUrl}/subscribers/`,
@@ -89,11 +90,11 @@ export class ApiService {
     console.log('Id delete', id, response);
     return response;
   }
-  
 
   async updateSubscriberById(id: number, subscriber: any) {
     try {
-      const response = await axios.put(`${this.baseUrl}/subscribers/${id}`, 
+      const response = await axios.put(
+        `${this.baseUrl}/subscribers/${id}`,
         subscriber,
         { headers: { Authorization: `Bearer ${this.token}` } }
       );
@@ -104,18 +105,21 @@ export class ApiService {
   }
 
   async getCountries(params: any): Promise<any> {
-    return axios.get(`${this.baseUrl}/countries`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`
-      },
-      params: params
-    })
-      .then(response => response.data)
-      .catch(error => {
-        throw new Error(error)
+    try {
+      const response = await axios.get(`${this.baseUrl}/countries`, {
+        params: params,
+        headers: { Authorization: `Bearer ${this.token}` },
       });
+      this.CountryOptions = response.data.Data;
+      return response.data;
+    } catch (error) {
+      console.error(error);
     }
-  
+  }
+
+  getCountryOptions() {
+    return this.CountryOptions;
+  }
 
   getUserName() {
     return this.Username;

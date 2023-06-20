@@ -12,6 +12,11 @@ import { Router } from '@angular/router';
 export class CreateComponent implements OnInit {
   subscriberForm!: FormGroup;
   submitted: boolean = false;
+  code!: number;
+  nameCountry!: string;
+  countryOptions: any[] = []; 
+  countrySelected!: string;
+  countryCodeSeleted!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,12 +30,14 @@ export class CreateComponent implements OnInit {
       Name: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       PhoneNumber: ['', Validators.required],
-      CountryCode: ['', [Validators.required, Validators.maxLength(2)]],
-      Country: ['', Validators.required],
+      // CountryCode: ['', Validators.required, Validators.maxLength(2)],
       JobTitle: [''],
       Area: [''],
       Topics: [''],
     });
+
+    this.countryOptions = this.apiService.getCountryOptions();
+    console.log('que llega de aqui', this.countryOptions);
   }
 
   onSubmit() {
@@ -41,8 +48,8 @@ export class CreateComponent implements OnInit {
             Name: this.subscriberForm.value.Name,
             Email: this.subscriberForm.value.Email,
             PhoneNumber: this.subscriberForm.value.PhoneNumber,
-            CountryCode: this.subscriberForm.value.CountryCode.toUpperCase(),
-            Country: this.subscriberForm.value.Country,
+            CountryCode: this.countryCodeSeleted,
+            Country: this.countrySelected,
             JobTitle: this.subscriberForm.value.JobTitle,
             Area: this.subscriberForm.value.Area,
             Topics: [],
@@ -65,6 +72,10 @@ export class CreateComponent implements OnInit {
     } else {
       console.error('Invalid form data');
     }
+  }
+
+  onCountryChange(event: any): void {
+    console.log('pais seleccionado ', event)
   }
 
   goHome() {
