@@ -93,10 +93,10 @@ export class ApiService {
 
   async updateSubscriberById(id: number, subscriber: any) {
     try {
-      const response = await axios.put(`${this.baseUrl}/subscribers/${id}`, {
-        Subscriber: subscriber,
-        headers: { Authorization: `Bearer ${this.token}` },
-      });
+      const response = await axios.put(`${this.baseUrl}/subscribers/${id}`, 
+        subscriber,
+        { headers: { Authorization: `Bearer ${this.token}` } }
+      );
       return response.data;
     } catch (error) {
       console.error(error);

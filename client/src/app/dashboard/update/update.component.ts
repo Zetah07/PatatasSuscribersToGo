@@ -36,7 +36,7 @@ export class UpdateComponent implements OnInit {
     try {
       await this.apiService.updateSubscriberById(this.subscriberId, this.subscriber);
       this.toastr.success('Suscriptor actualizado exitosamente', 'Éxito');
-      this.router.navigate(['/home']);
+      this.goHome();
     } catch (error) {
       console.error(error);
       this.toastr.error('No se pudo actualizar el suscriptor', 'Error');
