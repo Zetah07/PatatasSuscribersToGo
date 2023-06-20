@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
-    const storedToken = localStorage.getItem('authToken'); // Obtén el token del almacenamiento local
+    const storedToken = localStorage.getItem('authToken'); 
   if (storedToken) {
     this.apiService.setToken(storedToken);
     this.getSubscribers();
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit{
       .then((response: any) => {
         if (Array.isArray(response.Data)) {
           this.subscribers = response.Data;
-          // console.log(this.subscribers);
+          console.log(this.subscribers);
         } else {
           console.error('Invalid response data. Expected an array.');
         }

@@ -30,7 +30,6 @@ export class ApiService {
     if (response.status === 200) {
       this.Username = response.data.FirstName + '' + response.data.LastName;
       this.token = response.data.Token;
-      console.log( 'cosas que pasan', response.data)
       this.setToken(response.data.Token);
       return response.data;
     } else {
@@ -76,7 +75,7 @@ export class ApiService {
   }
 
   async addSubscriber(subscribers: any) {
-    // console.log('addSubscriber', subscribers);
+    console.log('addSubscriber', subscribers);
 
     try {
       const response = await axios.post(
@@ -94,7 +93,7 @@ export class ApiService {
     const response = await axios.delete(`${this.baseUrl}/subscribers/${id}`, {
       headers: { Authorization: `Bearer ${this.token}`},
     });
-    // console.log('Id delete', id, response);
+    console.log('Id delete', id, response);
     return response;
   }
 
@@ -134,6 +133,5 @@ export class ApiService {
 
   setToken(token: string) {
     this.token = token;
-    localStorage.setItem('token', token);
-  }
+    localStorage.setItem(this.tokenKey, token);  }
 }

@@ -76,9 +76,9 @@
       
       <div class="mb-4">
         <label for="CountryCode" class="block">Codigo del pais:</label>
-        <select id="CountryCode" class="w-full border border-gray-300 rounded px-4 py-2" (change)="onCountryChange($event)">
-          <option >Seleccione un país</option>
-    <option *ngFor="let country of countryOptions" [value]="country.Name">{{ country.Name }} / {{country.Code}} </option>
+        <select id="CountryCode" formControlName="CountryCode"class="w-full border border-gray-300 rounded px-4 py-2" (change)="onCountryChange($event)">
+          <option value="">Seleccione un código de país</option>
+    <option *ngFor="let country of countryOptions" [value]="country.Code">{{ country.Name }} // {{ country.Code }}</option>
         </select>
         <div
           *ngIf="
@@ -110,6 +110,17 @@
           id="Area"
           formControlName="Area"
           placeholder="desarrollo"
+          class="w-full border border-gray-300 rounded px-4 py-2"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="Topics" class="block">Temas:</label>
+        <input
+          type="text"
+          id="Topics"
+          formControlName="Topics"
+          placeholder="Frontend - Backend - Fullstack"
           class="w-full border border-gray-300 rounded px-4 py-2"
         />
       </div>
