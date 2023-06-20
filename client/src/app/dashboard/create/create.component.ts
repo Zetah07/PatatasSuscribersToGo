@@ -25,7 +25,7 @@ export class CreateComponent implements OnInit {
       Name: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       PhoneNumber: ['', Validators.required],
-      CountryCode: ['', Validators.required],
+      CountryCode: ['', [Validators.required, Validators.maxLength(2)]],
       Country: ['', Validators.required],
       JobTitle: [''],
       Area: [''],
@@ -36,14 +36,18 @@ export class CreateComponent implements OnInit {
   onSubmit() {
     if (this.subscriberForm.valid) {
       const formData = {
-        name: this.subscriberForm.value.Name,
-        email: this.subscriberForm.value.Email,
-        phoneNumber: this.subscriberForm.value.PhoneNumber,
-        countryCode: this.subscriberForm.value.CountryCode.toUpperCase().substring(2, 3),
-        country: this.subscriberForm.value.Country,
-        jobTitle: this.subscriberForm.value.JobTitle,
-        area: this.subscriberForm.value.Area,
-        topics: this.subscriberForm.value.Topics,
+        Subscribers: [
+          {
+            Name: this.subscriberForm.value.Name,
+            Email: this.subscriberForm.value.Email,
+            PhoneNumber: this.subscriberForm.value.PhoneNumber,
+            CountryCode: this.subscriberForm.value.CountryCode.toUpperCase(),
+            Country: this.subscriberForm.value.Country,
+            JobTitle: this.subscriberForm.value.JobTitle,
+            Area: this.subscriberForm.value.Area,
+            Topics: [],
+          },
+        ],
       };
 
       this.apiService.addSubscriber(formData).then(
@@ -51,6 +55,7 @@ export class CreateComponent implements OnInit {
           console.log('Response:', response);
           this.toastr.success('Suscriptor creado exitosamente', 'Éxito');
           this.subscriberForm.reset();
+          this.goHome();
         },
         (error: any) => {
           console.log('Error:', error);

@@ -1,7 +1,8 @@
-<div class="flex">
-    <app-navbar class="w-1/6"></app-navbar>
-    <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
-      <button (click)="goHome()" class="home-button absolute text-ColorNav text-xl top-4 right-4">
+<div class="flex mx-auto">
+  <app-navbar class="w-1/6"></app-navbar>
+  <div class="overflow-y-auto max-h-screen w-full">
+    <main class="main-content w-2/3 p-4 ml-40 flex flex-col">
+      <button (click)="goHome()" class="home-button absolute text-ColorNav text-xl top-4 right-7">
         <i class="fa-solid fa-house"></i>
       </button>
   
@@ -9,56 +10,22 @@
         <h1 class="text-3xl font-bold text-ColorNav">Paises</h1>
         <p class="text-gray-400">Indicativos y Codigo para referenciar los paises y la procedencia del suscriptor</p>
       </div>
-      <table class="w-full border border-gray-300">
+        <table class="w-full border border-gray-300 ">
           <thead>
-              <tr class="bg-slate-300 text-ColorNav">
-                  <th class="py-2 px-4">ID</th>
-                  <th class="py-2 px-4">Nombre</th>
-                  <th class="py-2 px-4">Código de Marcación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let country of countries" class="border-b border-gray-300">
-                    <td class="py-2 px-4">{{ country.Code }}</td>
-                    <td class="py-2 px-4">{{ country.Name }}</td>
-                    <td class="py-2 px-4">{{ country.PhoneCode }}</td>
-                </tr>
-            </tbody>
+            <tr class="bg-slate-300 text-ColorNav">
+              <th class="py-2 px-4">ID</th>
+              <th class="py-2 px-4">Nombre</th>
+              <th class="py-2 px-4">Código de Marcación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let country of countries" class="border-b border-gray-300 text-center">
+              <td class="py-2 px-4">{{ country.Code }}</td>
+              <td class="py-2 px-4">{{ country.Name }}</td>
+              <td class="py-2 px-4">{{ country.PhoneCode }}</td>
+            </tr>
+          </tbody>
         </table>
-    </main>
-</div>
-<div class="flex">
-  <app-navbar class="w-1/6"></app-navbar>
-  <main class="main-content w-2/3 p-4 ml-12 flex flex-col">
-    <button (click)="goHome()" class="home-button absolute text-ColorNav text-xl top-4 right-4">
-      <i class="fa-solid fa-house"></i>
-    </button>
-
-    <div class="text-center">
-      <h1 class="text-3xl font-bold text-ColorNav">Paises</h1>
-      <p class="text-gray-400">Indicativos y Codigo para referenciar los paises y la procedencia del suscriptor</p>
-    </div>
-
-    <div class="search-container mb-4">
-      <input [(ngModel)]="searchCriteria" placeholder="Buscar por nombre o código" class="border border-gray-300 px-4 py-2 rounded">
-      <button (click)="searchCountries()" class="bg-ColorNav text-white px-4 py-2 ml-4 rounded">Buscar</button>
-    </div>
-
-    <table class="w-full border border-gray-300">
-      <thead>
-        <tr class="bg-slate-300 text-white">
-          <th class="py-2 px-4">ID</th>
-          <th class="py-2 px-4">Nombre</th>
-          <th class="py-2 px-4">Código de Marcación</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let country of countries" class="border-b border-gray-300">
-          <td class="py-2 px-4">{{ country.Code }}</td>
-          <td class="py-2 px-4">{{ country.Name }}</td>
-          <td class="py-2 px-4">{{ country.PhoneCode }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
+      </main>
+  </div>
 </div>

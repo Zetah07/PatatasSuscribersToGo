@@ -22,16 +22,14 @@ export class CountriesComponent implements OnInit {
 
   getCountries() {
     const params = {
-      criteria: this.searchCriteria,
+      criteria: '',
       page: 1,
-      count: 10,
-      sortOrder: 'asc',
-      sortType: 1
+      count: 255,
     };
 
     this.apiService.getCountries(params)
       .then((response: any) => {
-        this.countries = response;
+        this.countries = response.Data;
         console.log('Countries:', this.countries);
       })
       .catch((error: any) => {

@@ -68,13 +68,14 @@ export class ApiService {
   }
 
   async addSubscriber(subscribers: any) {
+    console.log('addSubscriber', subscribers);
+    
     try {
       const response = await axios.post(
-        `${this.baseUrl}/subscribers`,
+        `${this.baseUrl}/subscribers/`,
         subscribers,
         { headers: { Authorization: `Bearer ${this.token}` } }
       );
-      console.log('apiservice',response.data);
       return response.data;
     } catch (error) {
       console.log(error);

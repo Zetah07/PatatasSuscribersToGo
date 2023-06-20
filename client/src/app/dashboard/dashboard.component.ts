@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit{
       .then((response: any) => {
           this.getSubscribers();
           this.toastr.success('Suscriptor eliminado exitosamente', 'Éxito');
-          this.closeModal();
+          this.closeModaldel();
       })
       .catch((error: any) => {
         console.error(error);
